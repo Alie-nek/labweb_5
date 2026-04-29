@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% from "macros/form_macros.html" import render_field, render_checkbox %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <h1 class="mt-5 text-center">Вход в систему</h1>
+        
+        <div class="card mt-4">
+            <div class="card-body">
+                <form method="POST">
+                    {{ form.hidden_tag() }}
+                    
+                    {{ render_field(form.username, placeholder="Введите логин") }}
+                    {{ render_field(form.password, placeholder="Введите пароль") }}
+                    
+                    {{ render_checkbox(form.remember) }}
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-box-arrow-in-right"></i> Войти
+                        </button>
+                    </div>
+                </form>
+                
+                <hr>
+                <div class="alert alert-info mb-0">
+                    <small>
+                        <strong>Тестовые данные:</strong><br>
+                        Администратор: admin / admin123<br>
+                        Пользователь: user / user123!
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

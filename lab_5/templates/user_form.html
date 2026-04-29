@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% from "macros/form_macros.html" import render_field, render_select %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <h1 class="mt-5">{{ title }}</h1>
+        
+        <div class="card mt-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="bi bi-person-plus"></i> {{ title }}</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    {{ form.hidden_tag() }}
+                    
+                    {% if form.username %}
+                        {{ render_field(form.username, placeholder="Введите логин (только латинские буквы и цифры, min 5 символов)") }}
+                    {% endif %}
+                    
+                    {% if form.password %}
+                        {{ render_field(form.password, placeholder="Введите пароль") }}
+                        <div class="alert alert-info py-2 mb-3">
+                            <small>
+                                <strong>Требования к паролю:</strong>
+                                <ul class="mb-0 ps-3">
+                                    <li>Минимум 8 символов</li>
+                                    <li>Заглавные и строчные буквы</li>
+                                    <li>Хотя бы одна цифра</li>
+                                    <li>Без пробелов</li>
+                                </ul>
+                            </small>
+                        </div>
+                    {% endif %}
+                    
+                    {{ render_field(form.last_name, placeholder="Введите фамилию (необязательно)") }}
+                    {{ render_field(form.first_name, placeholder="Введите имя") }}
+                    {{ render_field(form.patronymic, placeholder="Введите отчество (необязательно)") }}
+                    
+                    {{ render_select(form.role_id) }}
+                    
+                    <div class="mt-4 d-flex justify-content-between">
+                        <a href="{{ url_for('index') }}" class="btn btn-secondary">
+                            <i class="bi bi-x-circle"></i> Отмена
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-save"></i> Сохранить
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
